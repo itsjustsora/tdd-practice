@@ -2,14 +2,33 @@ package com.study.tdd.ch2;
 
 public class PasswordStrengthMeter {
 	public PasswordStrength meter(String s) {
-		if (s.length() < 8) {
-			return PasswordStrength.NORMAL;
-		}
+		if (s == null || s.isEmpty()) return PasswordStrength.INVALID;
 
+		boolean lenghEnough = s.length() >= 8;
 		boolean containsNum =  meetsContainingNumberCriteria(s);
+		boolean containsUpp = meetsContainingUppercaseCriteria(s);
+
+		if (lenghEnough && !containsNum && !containsUpp)
+			return PasswordStrength.WEAK;
+		if (!lenghEnough && containsNum && !containsUpp)
+			return PasswordStrength.WEAK;
+		if (!lenghEnough && !containsNum && containsUpp)
+			return PasswordStrength.WEAK;
+
+		if (!lenghEnough) return PasswordStrength.NORMAL;
 		if (!containsNum) return PasswordStrength.NORMAL;
+		if (!containsUpp) return PasswordStrength.NORMAL;
 
 		return PasswordStrength.STRONG;
+	}
+
+	private static boolean meetsContainingUppercaseCriteria(String s) {
+		for (char ch : s.toCharArray()) {
+			if (Character.isUpperCase(ch)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static boolean meetsContainingNumberCriteria(String s) {
