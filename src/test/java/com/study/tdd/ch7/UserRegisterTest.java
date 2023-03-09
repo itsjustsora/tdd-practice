@@ -2,13 +2,11 @@ package com.study.tdd.ch7;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class UserRegisterTest {
+class UserRegisterTest {
 	private UserRegister userRegister;
 	private StubWeakPasswordChecker stubPasswordChecker =
 		new StubWeakPasswordChecker();
